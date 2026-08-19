@@ -17,19 +17,20 @@ jobs:
         run: echo "hello world"
 
       - name: print current date and time
-        run: echo "NOW=$(date +'%Y-%m-%dT%H:%M:%S')" >> $GITHUB_ENV
+        run: 'echo "Current Date/Time: $(date +''%Y-%m-%dT%H:%M:%S'')"'
+
       - name: print branch name
-        run: echo "Branch: ${{ github.ref_name }}"
+        run: 'echo "Branch: ${{ github.ref_name }}"'
 
       - name: list files
-        run: ls -la
+        run: 'ls -la'
 
       - name: print operating system
-        run: echo "Operating System: $RUNNER_OS"
+        run: 'echo "Operating System: $RUNNER_OS"'
 
   show_date:
     runs-on: ubuntu-latest
 
     steps:
       - name: show date
-        run: echo "Current Date/Time: $(date +'%Y-%m-%d %H:%M:%S')"
+        run: 'echo "Current Date/Time: $(date +''%Y-%m-%d %H:%M:%S'')"'
