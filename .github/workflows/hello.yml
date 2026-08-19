@@ -1,0 +1,15 @@
+name: first pipeline
+on:
+    push
+    branches:
+        - main
+
+jobs:
+    greet
+    runs_on: ubuntu_latest
+    steps:
+        - name: checkput code
+          uses: actions/checkout@v4
+    
+        - name: print hello
+          run: echo "hello world"
