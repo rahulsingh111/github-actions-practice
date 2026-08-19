@@ -1,7 +1,7 @@
 name: first pipeline
 on:
     push
-    branches:
+    branches
         - main
 
 jobs:
