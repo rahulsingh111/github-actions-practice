@@ -17,8 +17,7 @@ jobs:
         run: echo "hello world"
 
       - name: print current date and time
-        run: echo "Current Date/Time: $(date +'%Y-%m-%d %H:%M:%S')"
-
+        run: echo "NOW=$(date +'%Y-%m-%dT%H:%M:%S')" >> $GITHUB_ENV
       - name: print branch name
         run: echo "Branch: ${{ github.ref_name }}"
 
