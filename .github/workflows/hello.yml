@@ -1,4 +1,5 @@
 name: first pipeline
+
 on:
   push:
     branches:
@@ -7,9 +8,29 @@ on:
 jobs:
   greet:
     runs-on: ubuntu-latest
+
     steps:
       - name: checkout code
         uses: actions/checkout@v4
-    
+
       - name: print hello
         run: echo "hello world"
+
+      - name: print current date and time
+        run: echo "Current Date/Time: $(date +'%Y-%m-%d %H:%M:%S')"
+
+      - name: print branch name
+        run: echo "Branch: ${{ github.ref_name }}"
+
+      - name: list files
+        run: ls -la
+
+      - name: print operating system
+        run: echo "Operating System: $RUNNER_OS"
+
+  show_date:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: show date
+        run: echo "Current Date/Time: $(date +'%Y-%m-%d %H:%M:%S')"
