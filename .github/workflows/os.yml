@@ -42,3 +42,31 @@ jobs:
                 echo "OS Name: ${{ runner.os }}"
                 echo "Runner hostname: $(hostname)"
                 echo "current User: $(whoami)"
+
+    self-hosted:
+        runs-on: self-hosted
+        steps:
+            - name: check code
+              uses: actions/checkout@v5
+            - name: print hostname
+              run: hostname
+
+            - name: print working directory
+              run: pwd
+
+            - name: create test file
+              run: |
+                echo "Created by GitHub Actions" > github-actions-test.txt
+
+            - name: verify file exists
+              run: |
+                ls -l github-actions-test.txt
+                test -f github-actions-test.txt
+                echo "File exists successfully!"
+
+            - name: show machine info
+              run: |
+                echo "Running on:"
+                hostname
+                echo "Working directory:"
+                pwd
