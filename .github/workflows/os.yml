@@ -60,9 +60,8 @@ jobs:
 
             - name: verify file exists
               run: |
-                ls -l github-actions-test.txt
-                test -f github-actions-test.txt
-                echo "File exists successfully!"
+                Get-Item github-actions-test.txt
+                Test-Path "github-actions-test.txt"
 
             - name: show machine info
               run: |
