@@ -13,6 +13,12 @@ jobs:
                 echo "OS Name: ${{ runner.os }}"
                 echo "Runner hostname: $(hostname)"
                 echo "current User: $(whoami)"
+            - name: shows software versions
+              run: |
+                echo "docker -version"
+                echo "python -version"
+                echo "node -v"
+                echo "git -v"
     windows:
         runs-on: windows-latest
         steps:
