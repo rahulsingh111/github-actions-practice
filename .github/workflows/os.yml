@@ -44,7 +44,7 @@ jobs:
                 echo "current User: $(whoami)"
 
     self-hosted:
-        runs-on: self-hosted
+        runs-on: [self-hosted, my-linux-runner]
         steps:
             - name: check code
               uses: actions/checkout@v5
