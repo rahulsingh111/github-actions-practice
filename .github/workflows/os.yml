@@ -15,10 +15,17 @@ jobs:
                 echo "current User: $(whoami)"
             - name: shows software versions
               run: |
-                docker -version
-                python -version
-                node -v
-                git -v
+                echo "docker"
+                docker --version
+
+                echo "python"
+                python --version
+
+                echo "node"
+                node --version
+
+                echo "git"
+                git --version
     windows:
         runs-on: windows-latest
         steps:
