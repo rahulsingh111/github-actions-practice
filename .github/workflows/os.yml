@@ -1,0 +1,31 @@
+name: os-checks
+on:
+    push:
+        branches:
+            - main
+    workflow_dispatch:
+jobs:
+    ubuntu:
+        runs-on: ubuntu-latest
+        steps:
+            - name: this shows ubuntu os
+              run: |
+                echo "OS Name: ${{ runner.os }}"
+                echo "Runner hostname: $(hostname)"
+                echo "current User: $(whoami)"
+    windows:
+        runs-on: windows-latest
+        steps:
+            - name: this shows windows os
+              run: |
+                echo "OS Name: ${{ runner.os }}"
+                echo "Runner hostname: $(hostname)"
+                echo "current User: $(whoami)"
+    macos:
+        runs-on: macos-latest
+        steps:
+            - name: this shows mac os
+              run: |
+                echo "OS Name: ${{ runner.os }}"
+                echo "Runner hostname: $(hostname)"
+                echo "current User: $(whoami)"
