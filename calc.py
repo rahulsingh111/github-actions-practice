@@ -20,7 +20,7 @@ def main():
     print("Simple Calculator")
     print("=================")
 
-    a = 20
+    a =50
     b = 5
 
     print(f"Addition:       {add(a, b)}")
