@@ -31,3 +31,11 @@ jobs:
         steps:
             - name: printing deploy
               run: echo "deploying"
+
+            - name: printing details
+              run: |
+                echo "Application: $APP_NAME"
+                echo "Environment: $ENVIRONMENT"
+                echo "Version: $VERSION"
+                echo "Commit SHA: $GITHUB_SHA"
+                echo "Actor: $GITHUB_ACTOR"
