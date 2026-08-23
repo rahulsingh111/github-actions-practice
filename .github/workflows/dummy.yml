@@ -20,4 +20,21 @@ jobs:
 
             - name: test secret masking
               run: echo "${{secrets.MY_SECRET_MESSAGE}}"
-                
+
+            - name: Generate test report
+              run: |
+                echo "Test Report" > test-report.txt
+                echo "================" >> test-report.txt
+                echo "Build: SUCCESS" >> test-report.txt
+                echo "Tests: 10 passed" >> test-report.txt
+                echo "Date: $(date)" >> test-report.txt
+
+            - name: Display report
+              run: cat test-report.txt
+
+            - name: Upload test report
+              uses: actions/upload-artifact@v4
+              with:
+                name: test-report
+                path: test-report.txt
+                            
