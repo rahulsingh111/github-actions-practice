@@ -4,11 +4,17 @@ on:
         branches:
             - main
     workflow_dispatch:
+
+env:
+    APP_NAME: myapp
 jobs:
     build:
         runs-on: ubuntu-latest
+        env: staging
         steps:
             - name: printing
+              env:
+                version: 1.0.0
               run: echo "building the app"
     
     test:
