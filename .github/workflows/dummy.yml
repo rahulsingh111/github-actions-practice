@@ -47,5 +47,5 @@ jobs:
             - name: print artifact content
               run: |
                 echo "contents are:"
-                cat test-report.text
+                cat test-report.txt
                             
