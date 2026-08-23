@@ -40,7 +40,7 @@ jobs:
             - name: allow failure
               continue-on-error: true
               run: |
-                echo: "this will fail"
+                echo "this will fail"
                 exit 1
 
             - name: this still runs
