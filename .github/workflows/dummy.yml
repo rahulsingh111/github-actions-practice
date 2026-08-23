@@ -1,0 +1,23 @@
+name: secret-show
+on:
+    push:
+        branches:
+            - main
+    workflow_dispatch:
+jobs:
+    readandprint:
+        runs-on: ubuntu-latest
+        steps:
+            - name: read the secret
+              env:
+                MY_SECRET_MESSAGE: ${{secrets.MY_SECRET_MESSAGE}} 
+              run: |
+                if [ -n "$MY_SECRET_MESSAGE"]; then
+                    echo "secret is set": true
+                else
+                    echo "secret is set: false"
+                fi
+
+            - name: test secret masking
+              run: echo "${{secrets.MY_SECRET_MESSAGE}}"
+                
