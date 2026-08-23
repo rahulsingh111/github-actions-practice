@@ -12,10 +12,9 @@ jobs:
         runs-on: ubuntu-latest
         env: 
             ENVIRONMENT: staging
+            VERSION: 1.0.0
         steps:
             - name: printing
-              env:
-                VERSION: 1.0.0
               run: echo "building the app"
 
             - name: printing details
@@ -25,7 +24,27 @@ jobs:
                 echo "Version: $VERSION"
                 echo "Commit SHA: $GITHUB_SHA"
                 echo "Actor: $GITHUB_ACTOR"
-    
+
+            - name: only runs on main
+              if: github.ref == 'refs/heads/main'
+              run: echo 'this step only runs on main'
+              
+            - name: intentional failure
+              id: failing-step
+              run: exit 1
+
+            - name: run after failure
+              if: failure()
+              run: echo "previous step failed so this is running"
+
+            - name: allow failure
+              continue-on-error: true
+              run: |
+                echo: "this will fail"
+                exit 1
+
+            - name: this still runs
+              run: echo "the workflow continues"
     test:
         runs-on: ubuntu-latest
         needs: build
@@ -56,3 +75,10 @@ jobs:
             - name: print date from previous job
               run: |
                 echo "Today's date is: ${{ needs.generate.outputs.today }}"
+
+    push-only:
+        if: github.event_name == 'push'
+        runs-on: ubuntu-latest
+        steps:
+            - name: push only job
+              run: echo "this job runs only after a push"
