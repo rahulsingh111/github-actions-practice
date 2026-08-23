@@ -37,6 +37,10 @@ jobs:
               if: failure()
               run: echo "previous step failed so this is running"
 
+    continue-error:
+        runs-on: ubuntu-latest
+        steps:
+            
             - name: allow failure
               continue-on-error: true
               run: |
