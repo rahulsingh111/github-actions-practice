@@ -29,14 +29,6 @@ jobs:
               if: github.ref == 'refs/heads/main'
               run: echo 'this step only runs on main'
               
-            - name: intentional failure
-              id: failing-step
-              run: exit 1
-
-            - name: run after failure
-              if: failure()
-              run: echo "previous step failed so this is running"
-
     continue-error:
         runs-on: ubuntu-latest
         steps:
