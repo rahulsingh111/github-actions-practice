@@ -5,7 +5,7 @@ on:
             - main
     workflow_dispatch:
 jobs:
-    readandprint:
+    generate:
         runs-on: ubuntu-latest
         steps:
             - name: read the secret
@@ -29,9 +29,6 @@ jobs:
                 echo "Tests: 10 passed" >> test-report.txt
                 echo "Date: $(date)" >> test-report.txt
 
-            - name: Display report
-              run: cat test-report.txt
-
             - name: Upload test report
               uses: actions/upload-artifact@v4
               with:
@@ -40,11 +37,12 @@ jobs:
 
     use-artifact:
         runs-on: windows-latest
+        needs: generate
         steps:
             - name: download artifact
               uses: actions/download-artifact@v4
               with:
-                name: test-report.txt
+                name: test-report
 
             - name: print artifact content
               run: |
