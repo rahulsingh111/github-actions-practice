@@ -8,13 +8,13 @@ jobs:
       runs-on: ubuntu-latest
       steps:
         - name: running linting
-          run: running linting
+          run: echo "running linting"
 
     test:
         runs-on: ubuntu-latest
         steps:
             - name: running tests
-              run: running tests
+              run: echo "running tests"
 
     summary:
         runs-on: ubuntu-latest
