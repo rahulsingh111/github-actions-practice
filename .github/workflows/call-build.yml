@@ -1,0 +1,12 @@
+on:
+    push:
+        branches:
+            - main
+jobs:
+    build:
+        uses: ./.github/workflows/reusable-workflow.yml
+        with:
+            app_name: "my-web-app"
+            environment: "production"
+        secrets:
+            DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
