@@ -11,3 +11,10 @@ jobs:
             environment: "production"
         secrets:
             DOCKERHUB_TOKEN: ${{ secrets.DOCKER_TOKEN }}
+
+    display-version:
+        runs-on: ubuntu-latest
+        needs: build
+        steps:
+            - name: Print build version
+              run: 'echo "Build version is: ${{ needs.build.outputs.build_version }}"'
