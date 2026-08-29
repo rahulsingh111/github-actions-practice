@@ -7,9 +7,4 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Print the client payload
-              run: ${{ github.event.client_payload.environment }}
-            - name: trigger payload
-              run: |
-                gh api repos/<owner>/<repo>/dispatches \
-                -f event_type=deploy-request \
-                -f client_payload='{"environment":"production"}'
+              run: echo "${{ github.event.client_payload.environment }}"
