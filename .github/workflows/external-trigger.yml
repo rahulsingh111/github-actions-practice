@@ -1,0 +1,15 @@
+name: external triggers
+on:
+    repository_dispatch:
+      types: [deploy-request]
+jobs:
+    client-payload:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Print the client payload
+              run: ${{ github.event.client_payload.environment }}
+            - name: trigger payload
+              run: |
+                gh api repos/<owner>/<repo>/dispatches \
+                -f event_type=deploy-request \
+                -f client_payload='{"environment":"production"}'
