@@ -1,13 +1,14 @@
 name: smart-triggers
 on:
-  push:
-    branches:
-      - main
-      - 'release/*'
-  pull_request:
-    branches:
-      - main
-      - 'release/*'
+    push:
+        paths:
+            - 'src/**'
+            - 'app/**'
+        paths-ignore:
+            - '*.md'
+            - 'docs/**'
+        branches:
+            [main , release/*]
 jobs:
     checking-workflow:
         runs-on: ubuntu-latest
