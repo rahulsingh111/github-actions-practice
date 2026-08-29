@@ -1,0 +1,14 @@
+name: testing
+on:
+    push:
+        branches:
+            - main
+jobs:
+    run-tests:
+        runs-on: ubuntu-latest
+        steps:
+            - name: test code
+              uses: actions/checkout@v4
+            - name: checking
+              run: |
+                echo "running tests"
