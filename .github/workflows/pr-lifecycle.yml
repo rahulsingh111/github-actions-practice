@@ -21,4 +21,4 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: post-merge actions
-              run: echo "Pull request was successfully merged"
+              run: echo "Pull request was successfully merged from dev"
