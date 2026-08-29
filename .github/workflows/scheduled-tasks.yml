@@ -13,7 +13,7 @@ jobs:
 
             - name: Health check
               run: |
-                HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://google.com))
+                HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://google.com)
 
                 echo "HTTP response code: $HTTP_STATUS"
 
