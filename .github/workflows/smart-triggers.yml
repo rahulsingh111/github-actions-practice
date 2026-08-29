@@ -1,0 +1,19 @@
+name: smart-triggers
+on:
+    push:
+        paths:
+            - 'src/**'
+            - 'app/**'
+        paths-ignore:
+            - '*.md'
+            - 'docs/**'
+        branches:
+            [main , release/*]
+jobs:
+    checking-workflow:
+        runs-on: ubuntu-latest
+        steps:
+            - name: checkout code
+              uses: actions/checkout@v4
+
+
