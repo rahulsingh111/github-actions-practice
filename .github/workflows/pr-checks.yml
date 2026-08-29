@@ -20,7 +20,7 @@ jobs:
             - name: read the branch
               run: |
                 BRANCH_NAME="${{ github.head_ref }}"
-                if [[ "$BRANCH_NAME" =~ ^(feature|fix|docs)/.+$ ]]; then
+                if [[ ! "$BRANCH_NAME" =~ ^(feature|fix|docs)/.+$ ]]; then
                     echo "::error::Branch name '$BRANCH_NAME' does not follow the required format."
                     echo "Expected format: feature/*, fix/*, or docs/*"
                     exit 1
