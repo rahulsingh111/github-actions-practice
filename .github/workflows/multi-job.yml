@@ -1,0 +1,80 @@
+name: multi-job
+on:
+    push:
+        branches:
+            - main
+    workflow_dispatch:
+
+env:
+    APP_NAME: myapp
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        env: 
+            ENVIRONMENT: staging
+            VERSION: 1.0.0
+        steps:
+            - name: printing
+              run: echo "building the app"
+
+            - name: printing details
+              run: |
+                echo "Application: $APP_NAME"
+                echo "Environment: $ENVIRONMENT"
+                echo "Version: $VERSION"
+                echo "Commit SHA: $GITHUB_SHA"
+                echo "Actor: $GITHUB_ACTOR"
+
+            - name: only runs on main
+              if: github.ref == 'refs/heads/main'
+              run: echo 'this step only runs on main'
+              
+    continue-error:
+        runs-on: ubuntu-latest
+        steps:
+            
+            - name: allow failure
+              continue-on-error: true
+              run: |
+                echo "this will fail"
+                exit 1
+
+            - name: this still runs
+              run: echo "the workflow continues"
+    test:
+        runs-on: ubuntu-latest
+        needs: build
+        steps:
+            - name: printing test
+              run: echo "running tests"
+
+    deploy:
+        runs-on: ubuntu-latest
+        needs: test
+        steps:
+            - name: printing deploy
+              run: echo "deploying"
+
+    set-output:
+        runs-on: ubuntu-latest
+        outputs:
+            today: ${{ steps.date.outputs.today }}
+        steps:
+            - name: get today's date
+              id: date
+              run: echo "today=$(date +'%Y-%m-%d')" >> "$GITHUB_OUTPUT"
+
+    display:
+        runs-on: ubuntu-latest
+        needs: set-output
+        steps:
+            - name: print date from previous job
+              run: |
+                echo "Today's date is: ${{ needs.generate.outputs.today }}"
+
+    push-only:
+        if: github.event_name == 'push'
+        runs-on: ubuntu-latest
+        steps:
+            - name: push only job
+              run: echo "this job runs only after a push"

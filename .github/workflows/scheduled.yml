@@ -1,0 +1,10 @@
+name: scheduled
+on:
+    schedule:
+    - cron: '0 2 * * *'
+jobs:
+    show-name:
+        runs-on: ubuntu-latest
+        steps:
+            - name: show name
+              run: echo " hello Rahul"
