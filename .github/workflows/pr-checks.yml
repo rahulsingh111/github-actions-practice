@@ -1,0 +1,41 @@
+name: pr-checks
+on:
+    pull_request:
+        branches:
+            - main
+jobs:
+    file-size-check:
+        runs-on: ubuntu-latest
+        steps:
+            - name: check the code
+              uses: actions/checkout@v5
+            - name: Fail if new files are committed over 1 MB
+              uses: pelotech/github-action-file-size-checker@v0.2.1
+              with:
+                max_file_size_kib: '1024'
+
+    branch-name-check:
+        runs-on: ubuntu-latest
+        steps:
+            - name: read the branch
+              run: |
+                BRANCH_NAME="${{ github.head_ref }}"
+                if [[ "$BRANCH_NAME" =~ ^(feature|fix|docs)/.+$ ]]; then
+                    echo "::error::Branch name '$BRANCH_NAME' does not follow the required format."
+                    echo "Expected format: feature/*, fix/*, or docs/*"
+                    exit 1
+                fi
+                echo "Branch name '$BRANCH_NAME' is valid."
+
+    pr-body-check:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Check PR description
+              run: |
+                PR_BODY="${{ github.event.pull_request.body }}"
+
+                if [ -z "$PR_BODY" ]; then
+                    echo "::warning::PR description is empty. Please add a description."
+                else
+                    echo "PR description is present."
+                fi
